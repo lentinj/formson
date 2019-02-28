@@ -1,0 +1,22 @@
+{
+  "name": "formson",
+  "version": "0.9.0",
+  "description": "HTML forms <-> JSON functions",
+  "main": "lib/index.js",
+  "repository": "http://github.com/lentinj/formson",
+  "author": "Jamie Lentin <jm@lentin.co.uk>",
+  "license": "MIT",
+  "scripts": {
+    "test": "NODE_PATH=. tape tests/test_*.js",
+    "test-browser": "NODE_PATH=. tape-server --port=8123 tests/test_*.js",
+    "lint": "jslint lib/*.js tests/*.js",
+    "all": "npm-run-all test lint"
+  },
+  "devDependencies": {
+    "jslint": "^0.12.1",
+    "npm-run-all": "^4.1.5",
+    "tape": "^4.10.1",
+    "tape-server": "git://github.com/lentinj/tape-server"
+  },
+  "dependencies": {}
+}
