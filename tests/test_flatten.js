@@ -58,6 +58,15 @@ test('to_object', function (t) {
         },
     }, "Setting a single value for an array sets for all values");
 
+    out = flatten.to_object([
+        {key: "cow[]", value: [] },
+        {key: "pig[]", value: undefined },
+    ]);
+    t.deepEqual(out, {
+        cow: [],
+        pig: [],
+    }, "Can empty arrays by setting to [] or undefined (set_element_value doesn't know the difference between cow and cow[])");
+
     t.end();
 });
 

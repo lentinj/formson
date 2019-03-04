@@ -306,5 +306,16 @@ test('update_form', function (t) {
         duck: undefined,
     }, "Can turn single checkboxes on/off");
 
+    test_uf([
+        '<input type="checkbox" name="cow[]" value="freda" />',
+        '<input type="checkbox" name="duck[]" value="harry" checked="checked" />',
+    ], {
+        cow: ['freda'],
+        duck: [],
+    }, {
+        cow: ['freda'],
+        duck: [],
+    }, "Single checkboxes work with array syntax too");
+
     t.end();
 });
