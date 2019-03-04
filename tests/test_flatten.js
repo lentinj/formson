@@ -32,8 +32,7 @@ test('to_object', function (t) {
     }, "Expand existing values");
 
     out = flatten.to_object([
-        {key: "cow[names][][last]", value: "moo" },
-        {key: "cow[names][][last]", value: "mooo" },
+        {key: "cow[names][][last]", value: ["moo", "mooo"] },
     ]);
     t.deepEqual(out, {
         cow: {
