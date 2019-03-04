@@ -252,6 +252,22 @@ test('update_form', function (t) {
     }, "Set one value, ignored unused value");
 
     test_uf([
+        '<input type="text" name="cow[]" value="cow a" />',
+        '<input type="text" name="cow[]" value="cow b" />',
+        '<input type="text" name="cow[]" value="cow c" />',
+    ], { cow: ["BESSIE", "GEORGE"] }, {
+        cow: ["BESSIE", "GEORGE", ''],
+    }, "Set 2 out of 3 cows, cleared final cow");
+
+    test_uf([
+        '<input type="text" name="cow[]" value="cow a" />',
+        '<input type="text" name="cow[]" value="cow b" />',
+        '<input type="text" name="cow[]" value="cow c" />',
+    ], { cow: ["BESSIE", "GEORGE", "CUTHBERT", "DIBBLE"]}, {
+        cow: ["BESSIE", "GEORGE", "CUTHBERT"],
+    }, "Set 3 cows, ignored extra value");
+
+    test_uf([
         '<input type="text" name="cow" value="cow a" />',
         '<input type="text" name="cow" value="cow b" />',
         '<input type="text" name="cow" value="cow c" />',
@@ -268,6 +284,16 @@ test('update_form', function (t) {
     }, {
         cow: ['freda', 'daisy'],
     }, "Set one value, ignored unused value");
+
+    test_uf([
+        '<input type="checkbox" name="cow[]" value="freda" />',
+        '<input type="checkbox" name="cow[]" value="daisy" checked="checked" />',
+        '<input type="checkbox" name="cow[]" value="bessie" />',
+    ], {
+        cow: ['freda', 'daisy', 'george'],
+    }, {
+        cow: ['freda', 'daisy'],
+    }, "Checkboxes work equivalently with a final []");
 
     test_uf([
         '<input type="checkbox" name="cow" value="freda" />',

@@ -32,13 +32,31 @@ test('to_object', function (t) {
     }, "Expand existing values");
 
     out = flatten.to_object([
-        {key: "cow[names][][last]", value: ["moo", "mooo"] },
+        {key: "cow[names][][first]", value: ["moo", "mooo"] },
+        {key: "cow[names][][last]", value: ["cow", "coow", "cw"] },
     ]);
     t.deepEqual(out, {
         cow: {
-            names: [{ last: "moo" }, { last: "mooo" }],
+            names: [
+                { first: "moo", last: 'cow' },
+                { first: "mooo", last: 'coow' },
+                { last: 'cw' },
+            ],
         },
     });
+
+    out = flatten.to_object([
+        {key: "cow[names][][first]", value: ["moo", "mooo"] },
+        {key: "cow[names][][last]", value: "smith" },
+    ]);
+    t.deepEqual(out, {
+        cow: {
+            names: [
+                { first: "moo", last: 'smith' },
+                { first: "mooo", last: 'smith' },
+            ],
+        },
+    }, "Setting a single value for an array sets for all values");
 
     t.end();
 });
@@ -61,5 +79,21 @@ test('get_values', function (t) {
         { key: "cow[names][1]", value: "freda" },
         { key: "cow[noise][mouth]", value: "moo" },
     ]);
+
+    obj = {
+        cow: {
+            names: [
+                { first: "moo", last: 'cow' },
+                { last: 'cw' },
+                { first: "mooo", last: 'coow' },
+            ],
+        },
+    };
+    t.deepEqual(flatten.get_values(obj, [
+        "cow[names][][first]",
+    ]), [
+        { key: "cow[names][][first]", value: ["moo", undefined, "mooo"] },
+    ]);
+
     t.end();
 });
