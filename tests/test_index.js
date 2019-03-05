@@ -19,6 +19,13 @@ test('get_value', function (t) {
         return;
     }
 
+    function test_get_element_value(html_str, expected) {
+        t.deepEqual(
+            formson.get_element_value(create_form(html_str).lastChild),
+            expected,
+            html_str);
+    }
+
     t.deepEqual(formson.get_element_value(create_form(
         '<input type="text" name="cow" />'
     ).lastChild), '', "input[type=text] Empty");
@@ -78,6 +85,16 @@ test('get_value', function (t) {
     t.deepEqual(formson.get_element_value(create_form(
         '<select name="cow" multiple="multiple"><option selected="selected">daisy</option><option selected="selected">freda</option><option selected="selected">bessie</option></select>'
     ).lastChild), ["daisy", "freda", "bessie"], "select[multiple] 3 items");
+
+    test_get_element_value(
+        '<input type="file" name="cow" />',
+        undefined
+    );
+
+    test_get_element_value(
+        '<input type="file" name="cow" multiple="multiple" />',
+        []
+    );
 
     t.end();
 });
