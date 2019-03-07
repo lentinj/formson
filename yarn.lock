@@ -1162,9 +1162,9 @@ syntax-error@^1.1.1:
   dependencies:
     acorn-node "^1.2.0"
 
-"tape-server@git://github.com/lentinj/tape-server":
-  version "0.9.0"
-  resolved "git://github.com/lentinj/tape-server#d2dfa838be105036724428f525d25d2e8d204d4e"
+tape-server@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/tape-server/-/tape-server-0.9.1.tgz#a8341dcf78e24f210048cc9430a9e9b8382cadeb"
   dependencies:
     browserify "^16.2.3"
     minimist "^1.2.0"
