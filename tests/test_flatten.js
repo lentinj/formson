@@ -3,10 +3,11 @@
 var test = require('tape');
 var flatten = require('lib/flatten.js');
 
-test('to_object', function (t) {
+test('set_values', function (t) {
     var out = {};
 
-    out = flatten.to_object([
+    out = {};
+    flatten.set_values(out, [
         {key: "cow[names][0][first]", value: "daisy" },
         {key: "cow[names][1][first]", value: "freda" },
         {key: "cow[noise][mouth]", value: "moo" },
@@ -17,7 +18,8 @@ test('to_object', function (t) {
             noise: { mouth: "moo" },
         },
     }, "Set values");
-    out = flatten.to_object([
+    out = {};
+    flatten.set_values(out, [
         {key: "cow[names][0][first]", value: "daisy" },
         {key: "cow[names][1][first]", value: "freda" },
         {key: "cow[noise][mouth]", value: "moo" },
@@ -31,7 +33,8 @@ test('to_object', function (t) {
         },
     }, "Expand existing values");
 
-    out = flatten.to_object([
+    out = {};
+    flatten.set_values(out, [
         {key: "cow[names][][first]", value: ["moo", "mooo"] },
         {key: "cow[names][][last]", value: ["cow", "coow", "cw"] },
     ]);
@@ -45,7 +48,8 @@ test('to_object', function (t) {
         },
     });
 
-    out = flatten.to_object([
+    out = {};
+    flatten.set_values(out, [
         {key: "cow[names][][first]", value: ["moo", "mooo"] },
         {key: "cow[names][][last]", value: "smith" },
     ]);
@@ -58,7 +62,8 @@ test('to_object', function (t) {
         },
     }, "Setting a single value for an array sets for all values");
 
-    out = flatten.to_object([
+    out = {};
+    flatten.set_values(out, [
         {key: "cow[]", value: [] },
         {key: "pig[]", value: undefined },
     ]);
