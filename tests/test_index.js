@@ -23,7 +23,8 @@ test('get_value', function (t) {
         t.deepEqual(
             formson.get_element_value(create_form(html_str).lastChild),
             expected,
-            html_str);
+            html_str
+        );
     }
 
     t.deepEqual(formson.get_element_value(create_form(
