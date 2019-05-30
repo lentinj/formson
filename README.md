@@ -43,6 +43,104 @@ Shorthand for ``formson.update_form(form_el, {})``. Returns the freshly created
 and updated element.
 
 
+## Form serialisation details
+
+Form fields can be nested at any depth using square brackets:
+
+```html test
+<input type="text" name="cow" value="bessie" />
+<input type="text" name="farm[field][cow]" value="freda" />
+```
+
+```json expected
+{
+    "cow": "bessie",
+    "farm": { "field": { "cow": "freda" }}
+}
+```
+
+### Arrays
+
+Multiple form fields with the same name will be treated as an array:
+
+```html test
+<input type="text" name="cows" value="bessie" />
+<input type="text" name="cows" value="freda" />
+<input type="text" name="cows" value="" />
+<input type="text" name="cows" value="mary" />
+```
+
+```json expected
+{
+    "cows": ["bessie", "freda", "", "mary"]
+}
+```
+
+This can be forced even with a single item by using ``[]``:
+
+```html test
+<input type="text" name="cows[]" value="bessie" />
+```
+
+```json expected
+{
+    "cows": ["bessie"]
+}
+```
+
+Individual positions can also be given:
+
+```html test
+<input type="text" name="farm[cows][0]" value="bessie" />
+<input type="text" name="farm[cows][3]" value="freda" />
+<input type="text" name="farm[cows][2]" value="" />
+<input type="text" name="farm[cows][1]" value="mary" />
+```
+
+```json expected
+{
+    "farm": { "cows": ["bessie", "mary", "", "freda"] }
+}
+```
+
+### Checkboxes
+
+Checkboxes are true if checked:
+
+```html test
+<input type="checkbox" name="farm[cows]" checked="checked" />
+<input type="checkbox" name="farm[pigs]" />
+```
+
+```json expected
+{
+    "farm": { "cows": true, "pigs": false }
+}
+```
+
+### Select boxes
+
+Select boxes return the value (or text) of selected item, or an array if multiple.
+
+```html test
+<select name="cow" multiple="multiple">
+  <option selected="selected" value="daisy">Daisy (the best cow)</option>
+  <option selected="selected">freda</option>
+  <option>bessie</option>
+</select>
+```
+
+```json expected
+{
+    "cow": [ "daisy", "freda" ]
+}
+```
+
+### File input
+
+File inputs will have a javascript File object as their value, if multiple they
+will have an array of File objects.
+
 ## License
 
 MIT
