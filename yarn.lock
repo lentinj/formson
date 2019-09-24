@@ -1426,12 +1426,11 @@ syntax-error@^1.1.1:
   dependencies:
     acorn-node "^1.2.0"
 
-tape-server@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/tape-server/-/tape-server-0.9.2.tgz#03bc1b2bc4a698800924b87ea0445b872fa0add3"
-  integrity sha512-xJufHQ+Eg/JlxBtkJxiHHVTvhhxbwAlqZIi3XeiM2UVn+XuaFYLcGL93VOfW+o9zmoxlw4Suoa9YhzNvgB+Vrg==
+tape-server@^0.99.0:
+  version "0.99.0"
+  resolved "https://registry.yarnpkg.com/tape-server/-/tape-server-0.99.0.tgz#089e27f4a1b53e8d0667f0ee938ebb5ea84ef0d1"
+  integrity sha512-qVoMW/6rN2qxhQB5cTzJr+XeV9vVVChQk+f8GuwIZMoqf0OTUK9TI+nVlip5bCWRWtmUp82t6dq5zaRQ6B3vlg==
   dependencies:
-    brfs "^2.0.2"
     browserify "^16.2.3"
     minimist "^1.2.0"
 
