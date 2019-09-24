@@ -48,4 +48,6 @@ test('README.md snippets', function (t) {
             test
         );
     });
+
+    t.end();
 });
