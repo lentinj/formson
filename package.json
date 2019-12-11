@@ -1,6 +1,6 @@
 {
   "name": "formson",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "HTML forms <-> JSON functions",
   "main": "lib/index.js",
   "repository": "http://github.com/lentinj/formson",
